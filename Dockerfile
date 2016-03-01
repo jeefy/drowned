@@ -1,11 +1,11 @@
-FROM python:2.7
+FROM gliderlabs/alpine:3.3
 
-RUN apt-get update && \
-	apt-get -y install tcpdump git && \
+RUN apk --update add python py-pip openssl ca-certificates git tcpdump
+RUN apk --update add --virtual build-dependencies python-dev build-base wget && \
 	git clone https://github.com/nimia/public_drown_scanner.git /app && \
 	cd /app && \
-	pip install && \
-	pip install enum pycrypto scapy pyasn1
+  	pip install enum pycrypto scapy pyasn1 && \
+	apk del build-dependencies
 
 WORKDIR /app
 
