@@ -9,6 +9,8 @@ RUN apt-get update && \
 
 WORKDIR /app
 
+COPY resources/ssl_tls_crypto.py scapy-ssl_tls/
+
 ENTRYPOINT ["python", "scanner.py"]
 
 CMD ["google.com", "443"]
